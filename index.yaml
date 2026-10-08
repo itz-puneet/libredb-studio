@@ -4,6 +4,98 @@ entries:
   - annotations:
       artifacthub.io/category: database
       artifacthub.io/changes: |
+        - "Security: with config.storageProvider sqlite or postgres, an account that signed in on a browser profile another account had signed out of received that account's browser copy of the workspace, the connections it had added with their saved credentials and its query history, from 0.8.0 through 0.18.0 (GHSA-jwvh-6phv-j9jh). The copy is now bound to the signed-in account, and the first sign-in after the upgrade starts from the account's server data. Such an install should upgrade"
+        - "Databend joins as a connection type of its own, over its HTTP query API, for self-hosted Databend and Databend Cloud warehouses; with a warehouse set, Studio sends no background check that would resume it"
+        - "A Seed sources card on the admin Overview page. A seed connectionString on a type that does not read it, and a seed file with a YAML warning, now fail the seed file at load: move the value into the connection fields, or quote it"
+        - "Query results export as Markdown or HTML, the object tree has a filter box, and a result column no longer loses its name or value to another column of the same name"
+        - "The image carries sharp 0.35.5 (GHSA-wq5f-xc86-pv6w)"
+        - "The chart description, keywords and README name Databend"
+        - "Track app release 0.18.1 (appVersion bump; default image tag follows)"
+      artifacthub.io/containsSecurityUpdates: "true"
+      artifacthub.io/images: |
+        - name: libredb-studio
+          image: ghcr.io/libredb/libredb-studio:0.18.1
+          platforms:
+            - linux/amd64
+            - linux/arm64
+      artifacthub.io/license: MIT
+      artifacthub.io/links: |
+        - name: Documentation
+          url: https://github.com/libredb/libredb-studio#readme
+        - name: Container Image
+          url: https://github.com/libredb/libredb-studio/pkgs/container/libredb-studio
+        - name: Source
+          url: https://github.com/libredb/libredb-studio
+      artifacthub.io/prerelease: "false"
+    apiVersion: v2
+    appVersion: 0.18.1
+    created: "2026-10-08T18:19:18.527918528Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 16.x.x
+    description: Web-based SQL IDE for cloud-native teams supporting twenty-seven
+      engines - PostgreSQL, MySQL, SQLite, DuckDB, Oracle, Db2 LUW, SQL Server, MongoDB,
+      Redis, Couchbase, ClickHouse, Apache Druid, Elasticsearch, OpenSearch, Trino,
+      Apache Cassandra, libSQL, Prometheus, Apache Kafka, etcd, Neo4j, Milvus, Qdrant,
+      InfluxDB, InfluxDB 3, Oxia and Databend
+    digest: 6fa26cb9a08cef497ccbab70c5437518760fed55c1978e002d810df4b58a7b94
+    home: https://github.com/libredb/libredb-studio
+    icon: https://raw.githubusercontent.com/libredb/libredb-studio/main/public/logo.svg
+    keywords:
+    - sql
+    - ide
+    - database
+    - postgresql
+    - mysql
+    - mongodb
+    - redis
+    - sqlite
+    - oracle
+    - mssql
+    - couchbase
+    - clickhouse
+    - druid
+    - elasticsearch
+    - opensearch
+    - trino
+    - cassandra
+    - libsql
+    - turso
+    - duckdb
+    - prometheus
+    - promql
+    - kafka
+    - etcd
+    - db2
+    - ibm-db2
+    - neo4j
+    - cypher
+    - victoriametrics
+    - redpanda
+    - milvus
+    - qdrant
+    - influxdb
+    - influxql
+    - influxdb3
+    - oxia
+    - databend
+    - web-ide
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - name: cevheri
+      url: https://github.com/cevheri
+    name: libredb-studio
+    sources:
+    - https://github.com/libredb/libredb-studio
+    type: application
+    urls:
+    - https://github.com/libredb/libredb-studio/releases/download/libredb-studio-0.1.79/libredb-studio-0.1.79.tgz
+    version: 0.1.79
+  - annotations:
+      artifacthub.io/category: database
+      artifacthub.io/changes: |
         - "Security: on a deployment with OIDC_ISSUER, OIDC_CLIENT_ID and OIDC_CLIENT_SECRET set, whatever its auth provider, the oidc-state cookie that GET /api/auth/oidc/login hands any visitor was also accepted as the session cookie, so an unauthenticated visitor passed the session check outside /admin, from 0.7.0 through 0.17.0 (GHSA-8gc9-2gm6-5c7f). The state is now signed with a key derived for that purpose. Such an install should upgrade"
         - "Seven engines join as eight connection types, and this is the first chart whose image runs them: etcd read-write over gRPC with Kubernetes-aware write refusals, IBM Db2 LUW over db2-node, Neo4j read-only with a Graph tab for Cypher results, Qdrant and Milvus read-only vector databases, InfluxDB as InfluxQL (1.x to 3) and InfluxDB 3 SQL, and Oxia read-only over gRPC"
         - "With config.storageProvider sqlite or postgres, local sign-in gains any number of accounts under Admin > Accounts and passkeys, which config.passkeyOrigin (chart 0.1.72) switches on. ADMIN_* and USER_* then only seed the accounts table on first start, the first start creates four storage tables, local users are signed out once, and MCP tokens issued before the upgrade must be created again"
@@ -5005,4 +5097,4 @@ entries:
     urls:
     - https://github.com/libredb/libredb-studio/releases/download/libredb-studio-0.1.0/libredb-studio-0.1.0.tgz
     version: 0.1.0
-generated: "2026-10-05T14:32:18.416110803Z"
+generated: "2026-10-08T18:19:18.519633269Z"
